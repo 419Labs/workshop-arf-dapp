@@ -1,9 +1,9 @@
 import { Flex, Box } from "@chakra-ui/react";
 
+import Block from "../components/wallet/Block";
 import CTASection from "components/samples/CTASection";
 import HelloText from "components/samples/HelloText";
 import { RegisterWhitelist, Transactions } from "components/wallet";
-import Block from "../components/wallet/Block";
 
 const Home = () => {
   return (

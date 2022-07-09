@@ -10,7 +10,9 @@ const Header = () => {
       <Heading as="h1" size="md">
         <Flex direction="column">
           <Link href="/">Full dApp Workshop (StarknetCC)</Link>
-          <Text mt={2} fontSize="sm" fontWeight="normal">By Alpha Road team</Text>
+          <Text mt={2} fontSize="sm" fontWeight="normal">
+            By Alpha Road team
+          </Text>
         </Flex>
       </Heading>
 

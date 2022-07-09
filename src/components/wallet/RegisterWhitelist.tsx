@@ -30,7 +30,7 @@ const RegisterWhitelist = () => {
     accessControllerContract
       .isAllowed(accountAddress)
       .then((response: CallContractResponse) => {
-        // eslint-disable-next-line no-console
+        // eslint-disable-next-line
         // @ts-ignore
         setWhitelisted(parseInt(toFelt(response.is_allowed), 10) > 0);
         setLoading(false);
@@ -47,7 +47,7 @@ const RegisterWhitelist = () => {
     accessControllerContract
       .freeSlotsCount()
       .then((response: CallContractResponse) => {
-        // eslint-disable-next-line no-console
+        // eslint-disable-next-line
         // @ts-ignore
         setFreeSlots(parseInt(toFelt(response.free_slots_count), 10));
         setLoading(false);
@@ -61,7 +61,6 @@ const RegisterWhitelist = () => {
 
   // Fetch free slots on every block
   useEffect(() => {
-    console.log(blockHash);
     getFreeSlotsCount();
   }, [blockHash, getFreeSlotsCount]);
 
@@ -102,33 +101,31 @@ const RegisterWhitelist = () => {
         <Text mt={4}>Free slots: {freeSlots > -1 ? freeSlots : "-"}</Text>
         {/* If user is whitelisted show congrats, else display button to register */}
         <Box mt={4}>
-          {connected &&
-            account &&
-            (isWhitelisted ? (
-              <Box fontSize="md">Congrats! You are whitelisted</Box>
-            ) : isLoading ? (
-              <Spinner />
-            ) : (
-              <Flex direction="row" my={4}>
-                <Button
-                  mr={4}
-                  w="fit-content"
-                  onClick={() => {
-                    checkWhitelisted(account.address);
-                  }}
-                >
-                  Check whitelisted
-                </Button>
-                <Button
-                  w="fit-content"
-                  onClick={() => {
-                    registerToWhitelist();
-                  }}
-                >
-                  Register to whitelist
-                </Button>
-              </Flex>
-            ))}
+          {isWhitelisted && (
+            <Box fontSize="md">Congrats! You are whitelisted</Box>
+          )}
+          {isLoading && <Spinner />}
+          {connected && account && (
+            <Flex direction="row" my={4}>
+              <Button
+                mr={4}
+                w="fit-content"
+                onClick={() => {
+                  checkWhitelisted(account.address);
+                }}
+              >
+                Check whitelisted
+              </Button>
+              <Button
+                w="fit-content"
+                onClick={() => {
+                  registerToWhitelist();
+                }}
+              >
+                Register to whitelist
+              </Button>
+            </Flex>
+          )}
         </Box>
         {!connected && (
           <Box
