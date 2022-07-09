@@ -3,7 +3,7 @@ import React from "react";
 import { AddTransactionResponse } from "starknet";
 import useDeepCompareEffect from "use-deep-compare-effect";
 
-import { useBlockHash } from "../BlockHashProvider";
+import { useBlock } from "../BlockProvider";
 import { useStarknet } from "../StarknetProvider";
 
 import { TransactionsContext } from "./context";
@@ -18,7 +18,7 @@ const TransactionsProvider = ({
   children,
 }: TransactionsProviderProps): JSX.Element => {
   const { provider } = useStarknet();
-  const blockHash = useBlockHash();
+  const { blockHash } = useBlock();
   const [transactions, dispatch] = React.useReducer(transactionsReducer, []);
 
   const addTransaction = React.useCallback(

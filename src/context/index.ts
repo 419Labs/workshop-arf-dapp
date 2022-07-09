@@ -1,3 +1,3 @@
-export * from "./BlockHashProvider";
+export * from "./BlockProvider";
 export * from "./StarknetProvider";
 export * from "./TransactionsProvider";

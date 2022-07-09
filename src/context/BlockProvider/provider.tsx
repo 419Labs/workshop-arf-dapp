@@ -3,6 +3,8 @@ import React from "react";
 import { useStarknet } from "../StarknetProvider";
 
 import { BlockHashContext } from "./context";
+import { BLOCK_STATE_INITIAL_STATE, BlockState } from "./model";
+import {toFelt} from "starknet/utils/number";
 
 interface BlockHashProviderProps {
   children: React.ReactNode;
@@ -14,13 +16,17 @@ export function BlockHashProvider({
   children,
 }: BlockHashProviderProps): JSX.Element {
   const { provider } = useStarknet();
-  const [blockHash, setBlockHash] = React.useState<string | undefined>(
-    undefined
+  const [block, setBlock] = React.useState<BlockState>(
+    BLOCK_STATE_INITIAL_STATE
   );
 
   const fetchBlockHash = React.useCallback(() => {
-    provider.getBlock().then((block) => {
-      setBlockHash(block.block_hash);
+    provider.getBlock().then((newBlock) => {
+      setBlock({
+        blockHash: newBlock.block_hash,
+        blockNumber: toFelt(newBlock.block_number),
+        gasPrice: newBlock.gas_price,
+      });
     });
   }, [provider]);
 
@@ -33,7 +39,7 @@ export function BlockHashProvider({
   }, [interval, fetchBlockHash]);
 
   return (
-    <BlockHashContext.Provider value={blockHash}>
+    <BlockHashContext.Provider value={block}>
       {children}
     </BlockHashContext.Provider>
   );

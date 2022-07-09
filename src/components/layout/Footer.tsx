@@ -9,10 +9,10 @@ const Footer = () => {
           textDecoration="none !important"
           outline="none !important"
           boxShadow="none !important"
-          href="https://github.com/a5f9t4"
+          href="https://github.com/419Labs"
           isExternal
         >
-          github.com/a5f9t4
+          https://github.com/419Labs
         </Link>
       </Text>
     </Flex>

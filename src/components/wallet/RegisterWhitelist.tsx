@@ -4,35 +4,81 @@ import {
   Code,
   Flex,
   Link,
+  Spinner,
   Text,
   useColorMode,
 } from "@chakra-ui/react";
+import { useCallback, useEffect, useState } from "react";
+import { AddTransactionResponse, CallContractResponse } from "starknet";
+import { toFelt } from "starknet/utils/number";
 
-import { useStarknet } from "context";
+import { useContract } from "../../context/ContractProvider";
+import { useBlock, useStarknet, useTransactions } from "context";
 
 const RegisterWhitelist = () => {
-  const CONTRACT_ADDRESS =
-    "0x06a09ccb1caaecf3d9683efe335a667b2169a409d19c589ba1eb771cd210af75";
-
-  const { connected } = useStarknet();
+  const { connected, account } = useStarknet();
   const { colorMode } = useColorMode();
+  const { accessControllerContract } = useContract();
+  const { addTransaction } = useTransactions();
+  const { blockHash } = useBlock();
+  const [isWhitelisted, setWhitelisted] = useState(false);
+  const [freeSlots, setFreeSlots] = useState(-1);
+  const [isLoading, setLoading] = useState(false);
 
-  // const { getSelectorFromName } = stark;
-  // const selector = getSelectorFromName("mint");
+  const checkWhitelisted = async (accountAddress: string) => {
+    setLoading(true);
+    accessControllerContract
+      .isAllowed(accountAddress)
+      .then((response: CallContractResponse) => {
+        // eslint-disable-next-line no-console
+        // @ts-ignore
+        setWhitelisted(parseInt(toFelt(response.is_allowed), 10) > 0);
+        setLoading(false);
+      })
+      .catch((e: Error) => {
+        setLoading(false);
+        // eslint-disable-next-line no-console
+        console.error("Error while check for whitelist", e);
+      });
+  };
 
-  const mintTokens = async () => {
-    /* const mintTokenResponse = await library.addTransaction({
-      type: "INVOKE_FUNCTION",
-      contract_address: CONTRACT_ADDRESS,
-      entry_point_selector: selector,
-      calldata: [
-        "25337092028752943692105536859798085962999747221745650943814125673320853150",
-        "10000000000000000000",
-        "0",
-      ],
-    }); */
-    // eslint-disable-next-line no-console
-    console.log("mintTokenResponse");
+  const getFreeSlotsCount = useCallback(() => {
+    setLoading(true);
+    accessControllerContract
+      .freeSlotsCount()
+      .then((response: CallContractResponse) => {
+        // eslint-disable-next-line no-console
+        // @ts-ignore
+        setFreeSlots(parseInt(toFelt(response.free_slots_count), 10));
+        setLoading(false);
+      })
+      .catch((e: Error) => {
+        setLoading(false);
+        // eslint-disable-next-line no-console
+        console.error("Error while get free slots", e);
+      });
+  }, [accessControllerContract]);
+
+  // Fetch free slots on every block
+  useEffect(() => {
+    console.log(blockHash);
+    getFreeSlotsCount();
+  }, [blockHash, getFreeSlotsCount]);
+
+  const registerToWhitelist = async () => {
+    setLoading(true);
+    accessControllerContract
+      .invoke("register", [])
+      .then((response: AddTransactionResponse) => {
+        // eslint-disable-next-line no-console
+        addTransaction(response);
+        setLoading(false);
+      })
+      .catch((e) => {
+        setLoading(false);
+        // eslint-disable-next-line no-console
+        console.error("Error while register for whitelist", e);
+      });
   };
 
   return (
@@ -42,28 +88,48 @@ const RegisterWhitelist = () => {
       </Text>
       <Flex direction="column">
         <Text>Access controller Contract:</Text>
-        <Code marginTop={4} w="fit-content">
+        <Code mt={4} w="fit-content">
           <Link
             isExternal
             textDecoration="none !important"
             outline="none !important"
             boxShadow="none !important"
-            href={`https://voyager.online/contract/${CONTRACT_ADDRESS}`}
+            href={`https://voyager.online/contract/${accessControllerContract.address}`}
           >
-            {CONTRACT_ADDRESS}
+            {accessControllerContract.address}
           </Link>
         </Code>
-        {connected && (
-          <Button
-            my={4}
-            w="fit-content"
-            onClick={() => {
-              mintTokens();
-            }}
-          >
-            Mint Tokens
-          </Button>
-        )}
+        <Text mt={4}>Free slots: {freeSlots > -1 ? freeSlots : "-"}</Text>
+        {/* If user is whitelisted show congrats, else display button to register */}
+        <Box mt={4}>
+          {connected &&
+            account &&
+            (isWhitelisted ? (
+              <Box fontSize="md">Congrats! You are whitelisted</Box>
+            ) : isLoading ? (
+              <Spinner />
+            ) : (
+              <Flex direction="row" my={4}>
+                <Button
+                  mr={4}
+                  w="fit-content"
+                  onClick={() => {
+                    checkWhitelisted(account.address);
+                  }}
+                >
+                  Check whitelisted
+                </Button>
+                <Button
+                  w="fit-content"
+                  onClick={() => {
+                    registerToWhitelist();
+                  }}
+                >
+                  Register to whitelist
+                </Button>
+              </Flex>
+            ))}
+        </Box>
         {!connected && (
           <Box
             backgroundColor={colorMode === "light" ? "gray.200" : "gray.500"}
@@ -71,7 +137,10 @@ const RegisterWhitelist = () => {
             marginTop={4}
             borderRadius={4}
           >
-            <Box fontSize="md">Connect your wallet to mint test tokens.</Box>
+            <Box fontSize="md">
+              Connect your wallet to see your registration or register to
+              whitelist.
+            </Box>
           </Box>
         )}
       </Flex>

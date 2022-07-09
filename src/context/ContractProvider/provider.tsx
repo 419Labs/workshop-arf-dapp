@@ -7,7 +7,13 @@ export interface ContractProviderProps {
   children: React.ReactNode;
 }
 
-export function ContractProvider({ children }: ContractProviderProps): JSX.Element {
+export function ContractProvider({
+  children,
+}: ContractProviderProps): JSX.Element {
   const state = useContractManager();
-  return <ContractContext.Provider value={state}>{children}</ContractContext.Provider>;
+  return (
+    <ContractContext.Provider value={state}>
+      {children}
+    </ContractContext.Provider>
+  );
 }
