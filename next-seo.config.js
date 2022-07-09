@@ -1,21 +1,21 @@
 /** @type {import('next-seo').DefaultSeoProps} */
 const defaultSEOConfig = {
-  title: "cairopal",
+  title: "Alpha Road Workshop",
   titleTemplate: "%s",
-  defaultTitle: "cairopal",
-  description: "Flexible Starknet Dapp Template",
+  defaultTitle: "Alpha Road Workshop",
+  description: "StarknetCC fullstack workshop by ARF",
   canonical: "https://nextarter-chakra.sznm.dev",
   openGraph: {
     url: "https://nextarter-chakra.sznm.dev",
-    title: "cairopal",
-    description: "Flexible Starknet Dapp Template",
+    title: "Alpha Road Workshop",
+    description: "StarknetCC fullstack workshop by ARF",
     images: [
       {
-        url: "https://cairopal.xyz/cairopal.png",
-        alt: "cairopal cairopal",
+        url: "https://testnet.app.alpharoad.fi/alpharoad-banner.png",
+        alt: "Alpha Road Workshop",
       },
     ],
-    site_name: "cairopal",
+    site_name: "alpharoad",
   },
   twitter: {
     handle: "@a5f9t4",

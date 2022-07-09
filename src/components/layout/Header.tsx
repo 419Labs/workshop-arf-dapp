@@ -8,7 +8,7 @@ const Header = () => {
   return (
     <Flex as="header" width="full" align="center">
       <Heading as="h1" size="md">
-        <Link href="/">cairopal</Link>
+        <Link href="/">Alpha Road Workshop</Link>
       </Heading>
 
       <Box marginLeft="auto">

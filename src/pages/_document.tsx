@@ -11,7 +11,7 @@ import * as React from "react";
 
 import createEmotionCache from "styles/createEmotionCache";
 
-const APP_NAME = "cairopal";
+const APP_NAME = "Alpha Road Workshop";
 
 class MyDocument extends Document {
   static async getInitialProps(ctx: DocumentContext) {
