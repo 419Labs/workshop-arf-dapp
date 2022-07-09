@@ -4,20 +4,11 @@ import { useEffect } from "react";
 import { useStarknet } from "context";
 
 const WalletConnect = () => {
-  const {
-    account,
-    connected,
-    setConnected,
-    connectBrowserWallet,
-    checkMissingWallet,
-  } = useStarknet();
+  const { account, connected, setConnected, connectBrowserWallet } =
+    useStarknet();
 
   useEffect(() => {
-    checkMissingWallet();
-  }, [checkMissingWallet]);
-
-  useEffect(() => {
-    if (account && account.length > 0) {
+    if (account && account.address.length > 0) {
       setConnected(true);
     }
   }, [account, setConnected, connected]);
@@ -45,8 +36,8 @@ const WalletConnect = () => {
       }}
     >
       {account
-        ? `${account.substring(0, 4)}...${account.substring(
-            account.length - 4
+        ? `${account.address.substring(0, 4)}...${account.address.substring(
+            account.address.length - 4
           )}`
         : "No Account"}
     </Button>

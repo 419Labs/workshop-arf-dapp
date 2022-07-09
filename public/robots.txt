@@ -3,7 +3,7 @@ User-agent: *
 Allow: /
 
 # Host
-Host: https://cairopal.com
+Host: https://testnet.app.alpharoad.fi/
 
 # Sitemaps
-Sitemap: https://cairopal.com/sitemap.xml
+Sitemap: https://testnet.app.alpharoad.fi/sitemap.xml

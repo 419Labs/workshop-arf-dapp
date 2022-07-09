@@ -2,25 +2,20 @@ import {
   Box,
   Button,
   Code,
+  Flex,
   Link,
   Text,
-  useBreakpointValue,
   useColorMode,
 } from "@chakra-ui/react";
-import { stark } from "starknet";
 
 import { useStarknet } from "context";
 
-const MintTokens = () => {
+const RegisterWhitelist = () => {
   const CONTRACT_ADDRESS =
     "0x06a09ccb1caaecf3d9683efe335a667b2169a409d19c589ba1eb771cd210af75";
 
-  const { connected, library } = useStarknet();
+  const { connected } = useStarknet();
   const { colorMode } = useColorMode();
-  const textSize = useBreakpointValue({
-    base: "xs",
-    sm: "md",
-  });
 
   // const { getSelectorFromName } = stark;
   // const selector = getSelectorFromName("mint");
@@ -43,14 +38,11 @@ const MintTokens = () => {
   return (
     <Box>
       <Text as="h2" marginTop={4} fontSize="2xl">
-        Mint Test Tokens
+        Register for whitelist
       </Text>
-      <Box d="flex" flexDirection="column">
-        <Text>Test Token Contract:</Text>
+      <Flex direction="column">
+        <Text>Access controller Contract:</Text>
         <Code marginTop={4} w="fit-content">
-          {/* {`${CONTRACT_ADDRESS.substring(0, 4)}...${CONTRACT_ADDRESS.substring(
-            CONTRACT_ADDRESS.length - 4
-          )}`} */}
           <Link
             isExternal
             textDecoration="none !important"
@@ -79,14 +71,12 @@ const MintTokens = () => {
             marginTop={4}
             borderRadius={4}
           >
-            <Box fontSize={textSize}>
-              Connect your wallet to mint test tokens.
-            </Box>
+            <Box fontSize="md">Connect your wallet to mint test tokens.</Box>
           </Box>
         )}
-      </Box>
+      </Flex>
     </Box>
   );
 };
 
-export default MintTokens;
+export default RegisterWhitelist;

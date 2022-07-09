@@ -1,16 +1,31 @@
-# cairopal • [![Tests](https://github.com/a5f9t4/cairopal/actions/workflows/tests.yml/badge.svg)](https://github.com/a5f9t4/cairopal/actions/workflows/tests.yml) [![Lints](https://github.com/a5f9t4/cairopal/actions/workflows/lints.yml/badge.svg)](https://github.com/a5f9t4/cairopal/actions/workflows/lints.yml) ![GitHub](https://img.shields.io/github/license/a5f9t4/cairopal) ![GitHub package.json version](https://img.shields.io/github/package-json/v/a5f9t4/cairopal) ![Vercel Deployment](https://img.shields.io/github/deployments/a5f9t4/cairopal/production?label=vercel)
-
+# NextJS - Starknet.js - Cairo • Workshop
 
 **Modern**, **Flexible** Starknet Dapp Template.
 
 
-## Developing
+## Introduction
+
+This workshop will show you how to dev a full Starknet dApp with NextJS & [Starknet.js](https://github.com/seanjameshan/starknet.js), including multi-wallets support([Argent-x](https://github.com/argentlabs/argent-x) | Braavos) and multi-call transactions.
+
+This repo contains the front-end part, you'll find the contracts part [here](https://github.com/419Labs/access-controller-contracts)
+
+## Prerequisite
+
+To follow this workshop you should at least:
+- Have basic knowledge in ReactJS / NextJS framework
+- Have basic knowledge in Cairo smart contracts development 
+- Have basic knowledge on how Starknet works(BC in general, Account abstraction, ...)
+
+About the tooling:
+- IDE
+- Yarn or NPM
+- [Nile](https://github.com/OpenZeppelin/nile) (smart contracts part)
 
 Clone the repository
 
 ```bash
-git clone git@github.com:a5f9t4/cairopal.git
-cd cairopal
+git clone git@github.com:419Labs/workshop-arf-dapp.git
+cd workshop-arf-dapp
 ```
 
 Install Dependencies
@@ -19,32 +34,18 @@ Install Dependencies
 yarn
 ```
 
-Run locally
+## TODO
+
+## Run
 
 ```bash
 yarn dev
 ```
 
-#### Run tests
+## Thanks
 
-```bash
-yarn test
-```
-
-## Acknowledgements
-
-- [StarkWare](https://starkware.co/)
-- [Starknet.js](https://github.com/seanjameshan/starknet.js)
-- [Argent-x](https://github.com/argentlabs/argent-x)
-- [Fracek's React, Starknet Boilerplate](https://github.com/fracek/starknet-react-example)
-- [OpenZeppelin](https://github.com/OpenZeppelin/cairo-contracts)
-
-## Security
-
-This project is still in a very early and experimental phase. It has never been audited nor thoroughly reviewed for security vulnerabilities. Not recommended for production use.
-
-Please report any security issues you find by opening up an issue in this reposisitory.
+Forked from [Cairopal](https://github.com/abigger87/cairopal)
 
 ## License
 
-Cairopal Contracts are released under the [AGPL-3.0-only](LICENSE).
+This workshop is released under the [AGPL-3.0-only](LICENSE).

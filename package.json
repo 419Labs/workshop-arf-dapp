@@ -1,5 +1,5 @@
 {
-	"name": "Alpha Road Workshop",
+	"name": "alpha-road-workshop",
 	"version": "0.3.0",
 	"description": "StarknetCC fullstack workshop by ARF",
 	"main": "index.js",

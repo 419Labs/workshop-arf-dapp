@@ -1,19 +1,19 @@
-import { getStarknet } from "get-starknet";
+import { connect } from "get-starknet";
 import { toast } from "material-react-toastify";
 import React from "react";
-import { defaultProvider, ProviderInterface } from "starknet";
+import { AccountInterface, defaultProvider, ProviderInterface } from "starknet";
 
 import { StarknetState } from "./model";
 
 interface StarknetManagerState {
-  account?: string;
+  account?: AccountInterface;
   connected?: boolean;
-  library: ProviderInterface;
+  provider: ProviderInterface;
 }
 
 interface SetAccount {
   type: "set_account";
-  account: string;
+  account?: AccountInterface;
 }
 
 interface SetProvider {
@@ -37,7 +37,7 @@ function reducer(
       return { ...state, account: action.account };
     }
     case "set_provider": {
-      return { ...state, library: action.provider };
+      return { ...state, provider: action.provider };
     }
     case "set_connected": {
       return { ...state, connected: action.con };
@@ -49,35 +49,24 @@ function reducer(
 }
 
 const useStarknetManager = (): StarknetState => {
-  const starknet = getStarknet();
   const [state, dispatch] = React.useReducer(reducer, {
-    library: defaultProvider,
+    provider: defaultProvider,
   });
 
-  const { account, connected, library } = state;
-
-  const checkMissingWallet = React.useCallback(async () => {
-    try {
-      await starknet.enable();
-    } catch (e) {
-      toast.error("⚠️ Argent-X wallet extension missing!", {
-        position: "top-left",
-        autoClose: 4000,
-        hideProgressBar: true,
-        closeOnClick: true,
-        pauseOnHover: true,
-        draggable: true,
-      });
-    }
-  }, [starknet]);
+  const { account, connected, provider } = state;
 
   const connectBrowserWallet = React.useCallback(async () => {
     try {
-      // eslint-disable-next-line @typescript-eslint/no-shadow
-      const [account] = await starknet.enable();
-      dispatch({ type: "set_account", account });
-      if (starknet.signer) {
-        dispatch({ type: "set_provider", provider: starknet.signer });
+      const starknet = await connect({ modalOptions: { theme: "dark" } }); // Let the user pick a wallet
+      if (!starknet) return;
+      await starknet.enable(); // connect the wallet
+      if (
+        starknet.isConnected &&
+        starknet.provider &&
+        starknet.account.address
+      ) {
+        dispatch({ type: "set_account", account: starknet.account });
+        dispatch({ type: "set_provider", provider: starknet.provider });
       }
     } catch (e) {
       toast.error("⚠️ Argent-X wallet extension missing!", {
@@ -89,12 +78,13 @@ const useStarknetManager = (): StarknetState => {
         draggable: true,
       });
     }
-  }, [starknet]);
+  }, []);
 
-  const setConnected = React.useCallback(async (con) => {
+  const setConnected = React.useCallback(async (con: boolean) => {
     dispatch({ type: "set_connected", con });
     if (!con) {
-      dispatch({ type: "set_account", account: "" });
+      dispatch({ type: "set_account", account: undefined });
+      dispatch({ type: "set_provider", provider: defaultProvider });
     }
   }, []);
 
@@ -103,8 +93,7 @@ const useStarknetManager = (): StarknetState => {
     connected,
     setConnected,
     connectBrowserWallet,
-    checkMissingWallet,
-    library,
+    provider,
   };
 };
 

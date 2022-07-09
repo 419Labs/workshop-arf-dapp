@@ -7,7 +7,7 @@ import {
 
 import { useStarknet } from "context";
 
-const SomeText = () => {
+const HelloText = () => {
   const { colorMode } = useColorMode();
   const textSize = useBreakpointValue({
     base: "xs",
@@ -20,8 +20,8 @@ const SomeText = () => {
       <Heading as="h2" fontSize="3xl">
         Hello,{" "}
         {account
-          ? `${account.substring(0, 4)}...${account.substring(
-              account.length - 4
+          ? `${account.address.substring(0, 4)}...${account.address.substring(
+              account.address.length - 4
             )}`
           : "anon"}
       </Heading>
@@ -40,4 +40,4 @@ const SomeText = () => {
   );
 };
 
-export default SomeText;
+export default HelloText;

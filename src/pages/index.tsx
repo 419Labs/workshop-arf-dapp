@@ -1,19 +1,19 @@
-import { Box } from "@chakra-ui/react";
+import { Flex, Box } from "@chakra-ui/react";
 
 import CTASection from "components/samples/CTASection";
-import SomeText from "components/samples/SomeText";
+import HelloText from "components/samples/HelloText";
 import { MintTokens, Transactions } from "components/wallet";
 
 const Home = () => {
   return (
-    <Box mb={8} w="full" h="full" d="flex" flexDirection="column">
-      <SomeText />
+    <Flex mb={8} w="full" h="full" flexDirection="column">
+      <HelloText />
       <Box flex="1 1 auto">
         <Transactions />
         <MintTokens />
       </Box>
       <CTASection />
-    </Box>
+    </Flex>
   );
 };
 

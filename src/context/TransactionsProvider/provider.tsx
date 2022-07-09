@@ -17,7 +17,7 @@ interface TransactionsProviderProps {
 const TransactionsProvider = ({
   children,
 }: TransactionsProviderProps): JSX.Element => {
-  const { library } = useStarknet();
+  const { provider } = useStarknet();
   const blockHash = useBlockHash();
   const [transactions, dispatch] = React.useReducer(transactionsReducer, []);
 
@@ -53,7 +53,7 @@ const TransactionsProvider = ({
         }
 
         try {
-          const newStatus = await library.getTransactionStatus(tx.hash);
+          const newStatus = await provider.getTransactionStatus(tx.hash);
           // eslint-disable-next-line no-console
           console.log(`new status ${newStatus.tx_status}`);
           const newTransaction: StoredTransaction = {

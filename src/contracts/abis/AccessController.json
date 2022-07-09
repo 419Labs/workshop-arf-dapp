@@ -1,0 +1,117 @@
+[
+    {
+        "inputs": [
+            {
+                "name": "initial_allowed_access",
+                "type": "felt"
+            },
+            {
+                "name": "owner_address",
+                "type": "felt"
+            }
+        ],
+        "name": "constructor",
+        "outputs": [],
+        "type": "constructor"
+    },
+    {
+        "inputs": [
+            {
+                "name": "address",
+                "type": "felt"
+            }
+        ],
+        "name": "isAllowed",
+        "outputs": [
+            {
+                "name": "is_allowed",
+                "type": "felt"
+            }
+        ],
+        "stateMutability": "view",
+        "type": "function"
+    },
+    {
+        "inputs": [],
+        "name": "freeSlotsCount",
+        "outputs": [
+            {
+                "name": "free_slots_count",
+                "type": "felt"
+            }
+        ],
+        "stateMutability": "view",
+        "type": "function"
+    },
+    {
+        "inputs": [],
+        "name": "getOwner",
+        "outputs": [
+            {
+                "name": "owner",
+                "type": "felt"
+            }
+        ],
+        "stateMutability": "view",
+        "type": "function"
+    },
+    {
+        "inputs": [
+            {
+                "name": "increase_max_slots_by",
+                "type": "felt"
+            }
+        ],
+        "name": "increaseMaxSlots",
+        "outputs": [],
+        "type": "function"
+    },
+    {
+        "inputs": [],
+        "name": "register",
+        "outputs": [],
+        "type": "function"
+    },
+    {
+        "inputs": [
+            {
+                "name": "address",
+                "type": "felt"
+            }
+        ],
+        "name": "forceRegister",
+        "outputs": [],
+        "type": "function"
+    },
+    {
+        "inputs": [
+            {
+                "name": "batch_address_len",
+                "type": "felt"
+            },
+            {
+                "name": "batch_address",
+                "type": "felt*"
+            }
+        ],
+        "name": "forceRegisterBatch",
+        "outputs": [],
+        "type": "function"
+    },
+    {
+        "inputs": [
+            {
+                "name": "new_owner",
+                "type": "felt"
+            }
+        ],
+        "name": "transferOwnership",
+        "outputs": [
+            {
+                "name": "new_owner",
+                "type": "felt"
+            }
+        ],
+        "type": "function"
+    }
+]
