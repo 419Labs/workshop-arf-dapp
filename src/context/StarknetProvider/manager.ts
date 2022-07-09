@@ -1,4 +1,4 @@
-import { getStarknet } from "@argent/get-starknet";
+import { getStarknet } from "get-starknet";
 import { toast } from "material-react-toastify";
 import React from "react";
 import { defaultProvider, ProviderInterface } from "starknet";
@@ -49,7 +49,7 @@ function reducer(
 }
 
 const useStarknetManager = (): StarknetState => {
-  const starknet = getStarknet({ showModal: false });
+  const starknet = getStarknet();
   const [state, dispatch] = React.useReducer(reducer, {
     library: defaultProvider,
   });

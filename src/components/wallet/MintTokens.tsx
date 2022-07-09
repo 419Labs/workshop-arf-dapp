@@ -22,11 +22,11 @@ const MintTokens = () => {
     sm: "md",
   });
 
-  const { getSelectorFromName } = stark;
-  const selector = getSelectorFromName("mint");
+  // const { getSelectorFromName } = stark;
+  // const selector = getSelectorFromName("mint");
 
   const mintTokens = async () => {
-    const mintTokenResponse = await library.addTransaction({
+    /* const mintTokenResponse = await library.addTransaction({
       type: "INVOKE_FUNCTION",
       contract_address: CONTRACT_ADDRESS,
       entry_point_selector: selector,
@@ -35,9 +35,9 @@ const MintTokens = () => {
         "10000000000000000000",
         "0",
       ],
-    });
+    }); */
     // eslint-disable-next-line no-console
-    console.log(mintTokenResponse);
+    console.log("mintTokenResponse");
   };
 
   return (
