@@ -31,18 +31,35 @@ cd workshop-arf-dapp
 Install Dependencies
 
 ```bash
-yarn
+yarn | npm install 
 ```
 
 ## TODO
 
+1) Familiarize a little with the project
+   1) Use of [React Context](https://fr.reactjs.org/docs/hooks-reference.html#usecontext) to isolate code complexity
+      1) **/src/context**
+   2) Components that use our wallet connection under **/src/components/wallet**
+   3) Contracts constants & ABI's under **/src/contracts**
+   4) (use of [ChakraUI](https://chakra-ui.com/getting-started) components library)
+
 ## Docs
+
+Here is all the docs you'll need to complete the workshop
 
 https://www.starknetjs.com/
 
 https://github.com/starknet-community-libs/get-starknet
 
 https://github.com/OpenZeppelin/nile
+
+## Helps
+
+Work with **big numbers** in JavaScript could be a mess.
+As you'll probably use the 18 decimals standard for the token balances, you'll not be able to store it as a Number but as a string representation.
+To abstract the complexity, you can use the well known [Ether.js library](https://docs.ethers.io/v5/getting-started/) (especially the formatUnits & parseUnits)
+in completion of the [Starknet.js](https://github.com/seanjameshan/starknet.js) helpers(toFelt, bnToUint256, ...)
+
 
 ## Thanks
 

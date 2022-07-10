@@ -8,7 +8,7 @@ import {
   Text,
   useColorMode,
 } from "@chakra-ui/react";
-import {parseEther, parseUnits} from "ethers/lib/utils";
+import { parseEther, parseUnits } from "ethers/lib/utils";
 import { useState } from "react";
 import {
   AccountInterface,
@@ -16,7 +16,7 @@ import {
   CallContractResponse,
   Invocation,
 } from "starknet";
-import {toBN, toFelt} from "starknet/utils/number";
+import { toFelt } from "starknet/utils/number";
 import { bnToUint256, uint256ToBN } from "starknet/utils/uint256";
 
 import { useContract } from "../../context/ContractProvider";
@@ -25,7 +25,6 @@ import {
   ARF_ETH_ERC20_CONTRACT_ADDRESS,
 } from "../../contracts/addresses";
 import { useStarknet, useTransactions } from "context";
-import {BigNumber} from "ethers";
 
 interface TokenState {
   address: string;
