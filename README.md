@@ -1,11 +1,11 @@
 # NextJS - Starknet.js - Cairo • Workshop
 
-**Modern**, **Flexible** Starknet Dapp Template.
+**StarknetCC** - Full dApp workshop by Alpha Road team
 
 
 ## Introduction
 
-This workshop will show you how to dev a full Starknet dApp with NextJS & [Starknet.js](https://github.com/seanjameshan/starknet.js), including multi-wallets support([Argent-x](https://github.com/argentlabs/argent-x) | Braavos) and multi-call transactions.
+This workshop will show you how to dev a full Starknet dApp with NextJS & [Starknet.js](https://github.com/seanjameshan/starknet.js), including multi-wallets support([Argent-x](https://github.com/argentlabs/argent-x) | [Braavos](https://braavos.app/)) and multi-call transactions.
 
 This repo contains the front-end part, you'll find the contracts part [here](https://github.com/419Labs/access-controller-contracts)
 
@@ -36,11 +36,13 @@ yarn
 
 ## TODO
 
-## Run
+## Docs
 
-```bash
-yarn dev
-```
+https://www.starknetjs.com/
+
+https://github.com/starknet-community-libs/get-starknet
+
+https://github.com/OpenZeppelin/nile
 
 ## Thanks
 
