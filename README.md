@@ -2,12 +2,15 @@
 
 **StarknetCC** - Full dApp workshop by Alpha Road team
 
-
 ## Introduction
 
 This workshop will show you how to dev a full Starknet dApp with NextJS & [Starknet.js](https://github.com/seanjameshan/starknet.js), including multi-wallets support([Argent-x](https://github.com/argentlabs/argent-x) | [Braavos](https://braavos.app/)) and multi-call transactions.
 
 This repo contains the front-end part, you'll find the contracts part [here](https://github.com/419Labs/access-controller-contracts)
+
+## The Goal
+
+![TODO](./files/todo.png "Title")
 
 ## Prerequisite
 
