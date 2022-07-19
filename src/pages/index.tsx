@@ -1,6 +1,7 @@
 import { Flex, Box } from "@chakra-ui/react";
 
 import Block from "../components/wallet/Block";
+import MultiMint from "../components/wallet/MultiMint";
 import CTASection from "components/samples/CTASection";
 import HelloText from "components/samples/HelloText";
 import { RegisterWhitelist, Transactions } from "components/wallet";
@@ -13,6 +14,7 @@ const Home = () => {
         <Block />
         <Transactions />
         <RegisterWhitelist />
+        <MultiMint />
       </Box>
       <CTASection />
     </Flex>
