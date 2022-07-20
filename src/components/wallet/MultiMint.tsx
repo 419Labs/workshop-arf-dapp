@@ -29,7 +29,7 @@ import { useStarknet, useTransactions } from "context";
 interface TokenState {
   address: string;
   balance: number;
-  // TODO here fetch infos from token
+  // Here you can fetch infos from token on-chain
 }
 
 const RegisterWhitelist = () => {

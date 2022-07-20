@@ -108,7 +108,7 @@ Here are the interesting files tree you'll have to update/use during this worksh
       1) ``> git clone git@github.com:419Labs/access-controller-contracts.git``
    3) Use nile to compile & deploy the contracts
       1) ``> nile compile``
-      2) ``> nile deploy AccessController --alias my_access_controller [...args] ``
+      2) ``> nile deploy AccessController --alias my_access_controller [...args] --network=goerli``
       3) Wait until the contract is deployed
          1) You can check the status of the TX by calling [get_transaction](https://docs.starknet.io/docs/CLI/commands#starknet-get_transaction) on the starknet cli
    4) Once it's ok, you can test it by calling *freeSlotsCount* on the deployed contract
