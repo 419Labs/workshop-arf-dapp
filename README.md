@@ -6,7 +6,11 @@
 
 This workshop will show you how to dev a full Starknet dApp with NextJS & [Starknet.js](https://github.com/seanjameshan/starknet.js), including multi-wallets support([Argent-x](https://github.com/argentlabs/argent-x) | [Braavos](https://braavos.app/)) and multi-call transactions.
 
-This repo contains the front-end part, you'll find the contracts part [here](https://github.com/419Labs/access-controller-contracts)
+This repo contains the front-end part, you'll find the contracts part [here (access controller)](https://github.com/419Labs/access-controller-contracts)
+
+You'll also use an ERC20 contract, with a 'freeMint' function added to permit to mint up to 1k tokens per call(see [ABI](src/contracts/abis/ARF_ERC20.json)).
+
+This workshop currently run on the **Starknet Goerli Testnet**
 
 ## The Goal
 
@@ -36,6 +40,12 @@ Install Dependencies
 
 ```bash
 yarn | npm install 
+```
+
+Run in dev 
+
+```bash
+yarn dev | npm run dev
 ```
 
 ## File tree
@@ -68,10 +78,11 @@ Here are the interesting files tree you'll have to update/use during this worksh
 
 1) Familiarize a little with the project
    1) See the file tree
-   2) Use of [React Context](https://fr.reactjs.org/docs/hooks-reference.html#usecontext) to isolate code complexity
-   5) (use of [ChakraUI](https://chakra-ui.com/getting-started) components library)
+   2) Contract addresses are located in [contract constants](src/contracts/addresses.ts)
+   3) Use of [React Context](https://fr.reactjs.org/docs/hooks-reference.html#usecontext) to isolate code complexity
+   4) (use of [ChakraUI](https://chakra-ui.com/getting-started) components library)
 2) Fetching block infos
-   1) Update the [StarknetProvider](src/context/StarknetProvider/manager.ts) to connect to the default starknet provider by using [Starknet.js](https://github.com/seanjameshan/starknet.js)
+   1) Update the [StarknetProvider](src/context/StarknetProvider/manager.ts) to connect to the default Starknet provider by using [Starknet.js](https://github.com/seanjameshan/starknet.js)
    2) Update the [BlockProvider](src/context/BlockProvider/provider.tsx), use the current provider to fetch current block infos
    3) (The UI part is already done here)
 3) Wallet connect
@@ -90,14 +101,14 @@ Here are the interesting files tree you'll have to update/use during this worksh
    2) Here you'll have to 
       1) Fetch balances of arfBTC & arfETH when needed
       2) Mint both arfBTC & arfETH in 1 TX using the multicall
-   3) (You can also make a register to whitelist + mint token in 1 TX as well)
+   3) (You can also make a 'register to whitelist + mint token' in 1 TX as well)
 6) Deploy your own Access Controller
    1) You can put aside IDE for the time & open your terminal
    2) clone the [access-controller](https://github.com/419Labs/access-controller-contracts) repo
       1) ``> git clone git@github.com:419Labs/access-controller-contracts.git``
    3) Use nile to compile & deploy the contracts
       1) ``> nile compile``
-      2) ``> nile deploy AccessController --alias my_access_controller [...args] ``
+      2) ``> nile deploy AccessController --alias my_access_controller [...args] --network=goerli``
       3) Wait until the contract is deployed
          1) You can check the status of the TX by calling [get_transaction](https://docs.starknet.io/docs/CLI/commands#starknet-get_transaction) on the starknet cli
    4) Once it's ok, you can test it by calling *freeSlotsCount* on the deployed contract
@@ -108,11 +119,37 @@ Here are the interesting files tree you'll have to update/use during this worksh
    1) In this part you'll add your own feature from A to Z
    2) Start by choosing the feature you want to implement
       1) Remove from whitelist, Get a list of all whitelisted addresses, ...
-   3) Implement the feature on the [AccessController_base contract](https://github.com/419Labs/access-controller-contracts/blob/main/contracts/libraries/AccessController_base.cairo) & Add the corresponding @view or @external interface on the [AccessController_base contract](https://github.com/419Labs/access-controller-contracts/blob/main/contracts/AccessController.cairo)
+   3) Implement the feature on the [AccessController_base contract](https://github.com/419Labs/access-controller-contracts/blob/main/contracts/libraries/AccessController_base.cairo) & Add the corresponding @view or @external interface on the [AccessController contract](https://github.com/419Labs/access-controller-contracts/blob/main/contracts/AccessController.cairo)
    4) Compile & Deploy your new contract
       1) Get the new abi.json & update the [current one](src/contracts/abis/AccessController.json)
    5) Implement the new feature on the UI
       1) By create a new component in */src/components/wallet* & add it in the [index](src/pages/index.tsx)
+
+## Contract addresses
+
+#### Access Controller
+    0x027b91a18ed8c3ea77617c1818fb43ab0397144b956506181bf88ab9885a1338
+
+#### arfETH ERC20
+    0x3dd7b0db7cca8e8468d06d27b40ca9368754c30d76900fcd19a65736fab9084
+    name: Ethereum Goerli
+    symbol: arfETH
+    supply: Infinite
+
+#### arfBTC ERC20
+    0x72df4dc5b6c4df72e4288857317caf2ce9da166ab8719ab8306516a2fddfff7
+    name: Bitcoin Goerli
+    symbol: arfBTC
+    supply: Infinite
+
+## Go further
+
+There some improvements you can make to improve this workshop, here is a non-exhaustive list:
+
+- Save transactions in local storage
+- Display current transaction information on the UI (toast, history panel, ...)
+- Auto reload of: whitelisted after register, balance after mint
+- ...
 
 ## Docs
 
@@ -123,6 +160,8 @@ https://www.starknetjs.com/
 https://github.com/starknet-community-libs/get-starknet
 
 https://github.com/OpenZeppelin/nile
+
+https://github.com/OpenZeppelin/cairo-contracts
 
 ## Helps
 
