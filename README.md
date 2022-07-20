@@ -6,7 +6,11 @@
 
 This workshop will show you how to dev a full Starknet dApp with NextJS & [Starknet.js](https://github.com/seanjameshan/starknet.js), including multi-wallets support([Argent-x](https://github.com/argentlabs/argent-x) | [Braavos](https://braavos.app/)) and multi-call transactions.
 
-This repo contains the front-end part, you'll find the contracts part [here](https://github.com/419Labs/access-controller-contracts)
+This repo contains the front-end part, you'll find the contracts part [here (access controller)](https://github.com/419Labs/access-controller-contracts)
+
+You'll also use an ERC20 contract, with a 'freeMint' function added to permit to mint up to 1k tokens per call(see [ABI](src/contracts/abis/ARF_ERC20.json)).
+
+This workshop currently run on the **Starknet Goerli Testnet**
 
 ## The Goal
 
@@ -36,6 +40,12 @@ Install Dependencies
 
 ```bash
 yarn | npm install 
+```
+
+Run in dev 
+
+```bash
+yarn dev | npm run dev
 ```
 
 ## File tree
@@ -133,6 +143,8 @@ https://www.starknetjs.com/
 https://github.com/starknet-community-libs/get-starknet
 
 https://github.com/OpenZeppelin/nile
+
+https://github.com/OpenZeppelin/cairo-contracts
 
 ## Helps
 
