@@ -16,47 +16,37 @@ import { useContract } from "../../context/ContractProvider";
 import { useBlock, useStarknet, useTransactions } from "context";
 
 const RegisterWhitelist = () => {
+  // Get account & connection status from Starknet Manager
   const { connected, account } = useStarknet();
   const { colorMode } = useColorMode();
+  // Get access controller contract
   const { accessControllerContract } = useContract();
   const { addTransaction } = useTransactions();
+  // Get the current block hash from Block Manager
   const { blockHash } = useBlock();
+
+  // Init the local state of the component
+  // True if whitelisted, false else
   const [isWhitelisted, setWhitelisted] = useState(false);
+  // Free slots available on the contract
   const [freeSlots, setFreeSlots] = useState(-1);
+  // Is the transaction loading
   const [isLoading, setLoading] = useState(false);
 
+  // Check if an address is currently whitelisted by the contract & update the state as well
+  // TODO: use the 'accessControllerContract' to call 'isAllowed' function with the accountAddress
+  // TODO: Update the local state with the response (setWhitelisted & setLoading)
   const checkWhitelisted = async (accountAddress: string) => {
     setLoading(true);
-    accessControllerContract
-      .isAllowed(accountAddress)
-      .then((response: CallContractResponse) => {
-        // eslint-disable-next-line
-        // @ts-ignore
-        setWhitelisted(parseInt(toFelt(response.is_allowed), 10) > 0);
-        setLoading(false);
-      })
-      .catch((e: Error) => {
-        setLoading(false);
-        // eslint-disable-next-line no-console
-        console.error("Error while check for whitelist", e);
-      });
+    // TODO FILL ME
   };
 
+  // Fetch the current free slots available on the access controller & update the state as well
+  // TODO: use the 'accessControllerContract' to call 'freeSlotsCount' function
+  // TODO: Update the local state with the response (setFreeSlots & setLoading)
   const getFreeSlotsCount = useCallback(() => {
     setLoading(true);
-    accessControllerContract
-      .freeSlotsCount()
-      .then((response: CallContractResponse) => {
-        // eslint-disable-next-line
-        // @ts-ignore
-        setFreeSlots(parseInt(toFelt(response.free_slots_count), 10));
-        setLoading(false);
-      })
-      .catch((e: Error) => {
-        setLoading(false);
-        // eslint-disable-next-line no-console
-        console.error("Error while get free slots", e);
-      });
+    // TODO FILL ME
   }, [accessControllerContract]);
 
   // Fetch free slots on every block
@@ -64,22 +54,16 @@ const RegisterWhitelist = () => {
     getFreeSlotsCount();
   }, [blockHash, getFreeSlotsCount]);
 
+  // Register to the whitelist with the current connected address
+  // TODO: use the 'accessControllerContract' to invoke 'register' function
+  // TODO: Update the local state with the response (setLoading)
+  // TODO: Add transaction to the transaction manager (addTransaction)
   const registerToWhitelist = async () => {
     setLoading(true);
-    accessControllerContract
-      .invoke("register", [])
-      .then((response: AddTransactionResponse) => {
-        // eslint-disable-next-line no-console
-        addTransaction(response);
-        setLoading(false);
-      })
-      .catch((e) => {
-        setLoading(false);
-        // eslint-disable-next-line no-console
-        console.error("Error while register for whitelist", e);
-      });
+    // TODO FILL ME
   };
 
+  // UI part, you dont need to touch it (but you can if you want to improve :D)
   return (
     <Box>
       <Text as="h2" marginTop={4} fontSize="2xl">

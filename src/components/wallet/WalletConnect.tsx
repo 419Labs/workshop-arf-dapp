@@ -5,7 +5,7 @@ import { useStarknet } from "context";
 
 // Wallet connect button component
 const WalletConnect = () => {
-  // get current account & function from Starknet Provider
+  // get current account & function from Starknet Manager
   const { account, connected, setConnected, connectBrowserWallet } =
     useStarknet();
 
