@@ -68,10 +68,11 @@ Here are the interesting files tree you'll have to update/use during this worksh
 
 1) Familiarize a little with the project
    1) See the file tree
-   2) Use of [React Context](https://fr.reactjs.org/docs/hooks-reference.html#usecontext) to isolate code complexity
-   5) (use of [ChakraUI](https://chakra-ui.com/getting-started) components library)
+   2) Contract addresses are located in [contract constants](src/contracts/addresses.ts)
+   3) Use of [React Context](https://fr.reactjs.org/docs/hooks-reference.html#usecontext) to isolate code complexity
+   4) (use of [ChakraUI](https://chakra-ui.com/getting-started) components library)
 2) Fetching block infos
-   1) Update the [StarknetProvider](src/context/StarknetProvider/manager.ts) to connect to the default starknet provider by using [Starknet.js](https://github.com/seanjameshan/starknet.js)
+   1) Update the [StarknetProvider](src/context/StarknetProvider/manager.ts) to connect to the default Starknet provider by using [Starknet.js](https://github.com/seanjameshan/starknet.js)
    2) Update the [BlockProvider](src/context/BlockProvider/provider.tsx), use the current provider to fetch current block infos
    3) (The UI part is already done here)
 3) Wallet connect
@@ -90,7 +91,7 @@ Here are the interesting files tree you'll have to update/use during this worksh
    2) Here you'll have to 
       1) Fetch balances of arfBTC & arfETH when needed
       2) Mint both arfBTC & arfETH in 1 TX using the multicall
-   3) (You can also make a register to whitelist + mint token in 1 TX as well)
+   3) (You can also make a 'register to whitelist + mint token' in 1 TX as well)
 6) Deploy your own Access Controller
    1) You can put aside IDE for the time & open your terminal
    2) clone the [access-controller](https://github.com/419Labs/access-controller-contracts) repo
@@ -119,7 +120,9 @@ Here are the interesting files tree you'll have to update/use during this worksh
 There some improvements you can make to improve this workshop, here is a non-exhaustive list:
 
 - Save transactions in local storage
-- Display current transaction information(Toast?)
+- Display current transaction information on the UI (toast, history panel, ...)
+- Auto reload of: whitelisted after register, balance after mint
+- ...
 
 ## Docs
 
