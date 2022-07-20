@@ -65,7 +65,7 @@ const useStarknetManager = (): StarknetState => {
   // Connect the user wallet
   // Display the "Wallet chooser" modal
   // TODO: use 'connect' & 'enable' function of get-starknet lib to let user choose a wallet to connect
-  // TODO: get account & provider after conenction
+  // TODO: get account & provider after connection
   // TODO: see https://github.com/starknet-community-libs/get-starknet#readme
   const connectBrowserWallet = React.useCallback(async () => {
     try {

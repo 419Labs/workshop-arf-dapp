@@ -16,6 +16,7 @@ const WalletConnect = () => {
     }
   }, [account, setConnected, connected]);
 
+  // UI part, you don't need to touch it (but you can if you want to improve :D)
   // If not connected -> show connect button, else show formatted address
   return !connected ? (
     <Button

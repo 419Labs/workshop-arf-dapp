@@ -32,12 +32,19 @@ interface TokenState {
   // Here you can fetch infos from token on-chain
 }
 
-const RegisterWhitelist = () => {
+// Multi mint component
+const MultiMint = () => {
+  // Get account & connection status from Starknet Manager
   const { connected, account } = useStarknet();
   const { colorMode } = useColorMode();
+  // Get erc20 contract
   const { erc20Contract } = useContract();
   const { addTransaction } = useTransactions();
+
+  // Init the local state of the component
+  // Is the transaction loading
   const [isLoading, setLoading] = useState(false);
+  // Balance of tokens
   const [balances, setBalances] = useState<TokenState[]>([
     {
       address: ARF_BTC_ERC20_CONTRACT_ADDRESS,
@@ -49,6 +56,7 @@ const RegisterWhitelist = () => {
     },
   ]);
 
+  // Update the local state balance of the given token by newBalance
   const updateBalance = (tokenAddress: string, newBalance: number) => {
     // Update state balances
     const idx = balances.findIndex((token) => token.address === tokenAddress);
@@ -59,55 +67,30 @@ const RegisterWhitelist = () => {
     }
   };
 
+  // Fetch balance of a token address for a specific account & update the state as well
+  // TODO: use the 'erc20Contract' to call 'balanceOf' function of the tokenAddress contract for the accountAddress
+  // TODO: Update the local state with the response (setLoading) & call updateBalance to update to balances state
+  // TODO: see https://www.starknetjs.com/docs/API/contract#creating-an-instance
+  // TODO: see https://github.com/419Labs/workshop-arf-dapp#helps
   const getBalance = async (tokenAddress: string, accountAddress: string) => {
     setLoading(true);
-    erc20Contract.attach(tokenAddress);
-    erc20Contract
-      .balanceOf(accountAddress)
-      .then((response: CallContractResponse) => {
-        updateBalance(
-          tokenAddress,
-          // eslint-disable-next-line
-          // @ts-ignore
-          formatEther(toFelt(uint256ToBN(response.balance)))
-        );
-
-        setLoading(false);
-      })
-      .catch((e: Error) => {
-        setLoading(false);
-        // eslint-disable-next-line no-console
-        console.error("Error while get balance", e);
-      });
+    // TODO FILL ME
   };
 
+  // Mint 1k tokens for each token in tokenAddresses as multicall
+  // TODO: use the 'erc20Contract' to execute 'freeMint' function of each tokenAddress contract for the given account
+  // TODO: Update the local state with the response (setLoading)
+  // TODO: Add transaction to the transaction manager (addTransaction)
+  // TODO: see https://github.com/0xs34n/starknet.js/blob/8969decf73cb62096da8804c37be135f624ac777/src/account/interface.ts#L63
   const mint = async (
     accountToUse: AccountInterface,
     tokenAddresses: string[]
   ) => {
     setLoading(true);
-    const amountToMint = bnToUint256(parseEther("1000").toString());
-    const multiCall: Invocation[] = tokenAddresses.map((tokenAddress) => {
-      return {
-        contractAddress: tokenAddress,
-        entrypoint: "freeMint",
-        calldata: [amountToMint.low, amountToMint.high],
-      };
-    });
-    accountToUse
-      .execute(multiCall)
-      .then((response: AddTransactionResponse) => {
-        // eslint-disable-next-line no-console
-        addTransaction(response);
-        setLoading(false);
-      })
-      .catch((e) => {
-        setLoading(false);
-        // eslint-disable-next-line no-console
-        console.error("Error while mint tokens", e);
-      });
+    // TODO FILL ME
   };
 
+  // UI part, you don't need to touch it (but you can if you want to improve :D)
   return (
     <Box>
       <Text as="h2" marginTop={4} fontSize="2xl">
@@ -146,6 +129,7 @@ const RegisterWhitelist = () => {
                 mr={4}
                 w="fit-content"
                 onClick={() => {
+                  // When user click on arfBTC getBalance
                   getBalance(ARF_BTC_ERC20_CONTRACT_ADDRESS, account.address);
                 }}
               >
@@ -155,6 +139,7 @@ const RegisterWhitelist = () => {
                 mr={4}
                 w="fit-content"
                 onClick={() => {
+                  // When user click on arfETH getBalance
                   getBalance(ARF_ETH_ERC20_CONTRACT_ADDRESS, account.address);
                 }}
               >
@@ -189,4 +174,4 @@ const RegisterWhitelist = () => {
   );
 };
 
-export default RegisterWhitelist;
+export default MultiMint;

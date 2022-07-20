@@ -15,6 +15,7 @@ import { toFelt } from "starknet/utils/number";
 import { useContract } from "../../context/ContractProvider";
 import { useBlock, useStarknet, useTransactions } from "context";
 
+// Whitelist register component
 const RegisterWhitelist = () => {
   // Get account & connection status from Starknet Manager
   const { connected, account } = useStarknet();
@@ -63,7 +64,7 @@ const RegisterWhitelist = () => {
     // TODO FILL ME
   };
 
-  // UI part, you dont need to touch it (but you can if you want to improve :D)
+  // UI part, you don't need to touch it (but you can if you want to improve :D)
   return (
     <Box>
       <Text as="h2" marginTop={4} fontSize="2xl">
@@ -97,6 +98,7 @@ const RegisterWhitelist = () => {
                 mr={4}
                 w="fit-content"
                 onClick={() => {
+                  // When user click on check whitelist
                   checkWhitelisted(account.address);
                 }}
               >
@@ -106,6 +108,7 @@ const RegisterWhitelist = () => {
                 disabled={isWhitelisted}
                 w="fit-content"
                 onClick={() => {
+                  // When user click on register to whitelist
                   registerToWhitelist();
                 }}
               >
