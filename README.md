@@ -119,7 +119,7 @@ Here are the interesting files tree you'll have to update/use during this worksh
    1) In this part you'll add your own feature from A to Z
    2) Start by choosing the feature you want to implement
       1) Remove from whitelist, Get a list of all whitelisted addresses, ...
-   3) Implement the feature on the [AccessController_base contract](https://github.com/419Labs/access-controller-contracts/blob/main/contracts/libraries/AccessController_base.cairo) & Add the corresponding @view or @external interface on the [AccessController_base contract](https://github.com/419Labs/access-controller-contracts/blob/main/contracts/AccessController.cairo)
+   3) Implement the feature on the [AccessController_base contract](https://github.com/419Labs/access-controller-contracts/blob/main/contracts/libraries/AccessController_base.cairo) & Add the corresponding @view or @external interface on the [AccessController contract](https://github.com/419Labs/access-controller-contracts/blob/main/contracts/AccessController.cairo)
    4) Compile & Deploy your new contract
       1) Get the new abi.json & update the [current one](src/contracts/abis/AccessController.json)
    5) Implement the new feature on the UI
