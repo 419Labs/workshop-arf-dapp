@@ -101,8 +101,10 @@ const RegisterWhitelist = () => {
         <Text mt={4}>Free slots: {freeSlots > -1 ? freeSlots : "-"}</Text>
         {/* If user is whitelisted show congrats, else display button to register */}
         <Box mt={4}>
-          {isWhitelisted && (
+          {isWhitelisted ? (
             <Box fontSize="md">Congrats! You are whitelisted</Box>
+          ) : (
+            <Box fontSize="md">You are currently not whitelisted</Box>
           )}
           {isLoading && <Spinner />}
           {connected && account && (
@@ -117,6 +119,7 @@ const RegisterWhitelist = () => {
                 Check whitelisted
               </Button>
               <Button
+                disabled={isWhitelisted}
                 w="fit-content"
                 onClick={() => {
                   registerToWhitelist();

@@ -114,6 +114,13 @@ Here are the interesting files tree you'll have to update/use during this worksh
    5) Implement the new feature on the UI
       1) By create a new component in */src/components/wallet* & add it in the [index](src/pages/index.tsx)
 
+## Go further
+
+There some improvements you can make to improve this workshop, here is a non-exhaustive list:
+
+- Save transactions in local storage
+- Display current transaction information(Toast?)
+
 ## Docs
 
 Here is all the docs you'll need to complete the workshop

@@ -22,12 +22,13 @@ const Transactions = () => {
         transactions.map((tx) => {
           return (
             <Box
+              key={`tx-${tx.hash}`}
               backgroundColor={colorMode === "light" ? "gray.200" : "gray.500"}
               padding={4}
               marginTop={4}
               borderRadius={4}
             >
-              <Box fontSize={textSize}>{tx}</Box>
+              <Box fontSize={textSize}>{`${tx.hash} ${tx.code}`}</Box>
             </Box>
           );
         })}

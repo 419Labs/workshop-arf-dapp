@@ -8,7 +8,7 @@ import {
   Text,
   useColorMode,
 } from "@chakra-ui/react";
-import { parseEther, parseUnits } from "ethers/lib/utils";
+import { formatEther, parseEther } from "ethers/lib/utils";
 import { useState } from "react";
 import {
   AccountInterface,
@@ -69,7 +69,7 @@ const RegisterWhitelist = () => {
           tokenAddress,
           // eslint-disable-next-line
           // @ts-ignore
-          parseEther(toFelt(uint256ToBN(response.balance))).toNumber()
+          formatEther(toFelt(uint256ToBN(response.balance)))
         );
 
         setLoading(false);
@@ -86,7 +86,7 @@ const RegisterWhitelist = () => {
     tokenAddresses: string[]
   ) => {
     setLoading(true);
-    const amountToMint = bnToUint256(parseUnits("1000", 18).toString());
+    const amountToMint = bnToUint256(parseEther("1000").toString());
     const multiCall: Invocation[] = tokenAddresses.map((tokenAddress) => {
       return {
         contractAddress: tokenAddress,
@@ -114,7 +114,7 @@ const RegisterWhitelist = () => {
         Multi-call mint tokens
       </Text>
       <Flex direction="column">
-        <Text mt={4}>arfBTC balance: {} | Contract:</Text>
+        <Text mt={4}>arfBTC balance: {balances[0].balance} | Contract:</Text>
         <Code mt={2} w="fit-content">
           <Link
             isExternal
@@ -126,7 +126,7 @@ const RegisterWhitelist = () => {
             {ARF_BTC_ERC20_CONTRACT_ADDRESS}
           </Link>
         </Code>
-        <Text mt={4}>arfETH balance: {} | Contract:</Text>
+        <Text mt={4}>arfETH balance: {balances[1].balance} | Contract:</Text>
         <Code mt={2} w="fit-content">
           <Link
             isExternal
