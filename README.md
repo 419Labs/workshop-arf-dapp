@@ -125,6 +125,23 @@ Here are the interesting files tree you'll have to update/use during this worksh
    5) Implement the new feature on the UI
       1) By create a new component in */src/components/wallet* & add it in the [index](src/pages/index.tsx)
 
+## Contract addresses
+
+#### Access Controller
+    0x027b91a18ed8c3ea77617c1818fb43ab0397144b956506181bf88ab9885a1338
+
+#### arfETH ERC20
+    0x3dd7b0db7cca8e8468d06d27b40ca9368754c30d76900fcd19a65736fab9084
+    name: Ethereum Goerli
+    symbol: arfETH
+    supply: Infinite
+
+#### arfBTC ERC20
+    0x72df4dc5b6c4df72e4288857317caf2ce9da166ab8719ab8306516a2fddfff7
+    name: Bitcoin Goerli
+    symbol: arfBTC
+    supply: Infinite
+
 ## Go further
 
 There some improvements you can make to improve this workshop, here is a non-exhaustive list:
