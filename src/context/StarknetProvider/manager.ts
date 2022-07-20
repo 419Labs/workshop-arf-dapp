@@ -1,10 +1,13 @@
 import { connect } from "get-starknet";
 import { toast } from "material-react-toastify";
 import React from "react";
+
+// Here we import the needed Interfaces of the StarknetJS & default provider
 import { AccountInterface, defaultProvider, ProviderInterface } from "starknet";
 
 import { StarknetState } from "./model";
 
+// Internal state management
 interface StarknetManagerState {
   account?: AccountInterface;
   connected?: boolean;
@@ -28,6 +31,7 @@ interface SetConnected {
 
 type Action = SetAccount | SetProvider | SetConnected;
 
+// Internal reducer
 function reducer(
   state: StarknetManagerState,
   action: Action
@@ -48,26 +52,32 @@ function reducer(
   }
 }
 
+// Start of Starknet manager
 const useStarknetManager = (): StarknetState => {
+  // Init the reducer, & set the provider to default one
+  // TODO: set the default provider as initial provider
   const [state, dispatch] = React.useReducer(reducer, {
-    provider: defaultProvider,
+    provider: ProviderInterface.prototype /* TODO REPLACE ME */,
   });
 
   const { account, connected, provider } = state;
 
+  // Connect the user wallet
+  // Display the "Wallet chooser" modal
+  // TODO: use 'connect' & 'enable' function of get-starknet lib to let user choose a wallet to connect
+  // TODO: get account & provider after conenction
+  // TODO: see https://github.com/starknet-community-libs/get-starknet#readme
   const connectBrowserWallet = React.useCallback(async () => {
     try {
-      const starknet = await connect({ modalOptions: { theme: "dark" } }); // Let the user pick a wallet
-      if (!starknet) return;
-      await starknet.enable(); // connect the wallet
-      if (
-        starknet.isConnected &&
-        starknet.provider &&
-        starknet.account.address
-      ) {
-        dispatch({ type: "set_account", account: starknet.account });
-        dispatch({ type: "set_provider", provider: starknet.provider });
-      }
+      // TODO FILL ME
+      dispatch({
+        type: "set_account",
+        account: undefined /* TODO REPLACE ME */,
+      });
+      dispatch({
+        type: "set_provider",
+        provider: undefined /* TODO REPLACE ME */,
+      });
     } catch (e) {
       toast.error("⚠️ Argent-X wallet extension missing!", {
         position: "top-left",
@@ -80,6 +90,7 @@ const useStarknetManager = (): StarknetState => {
     }
   }, []);
 
+  // Set state as connected
   const setConnected = React.useCallback(async (con: boolean) => {
     dispatch({ type: "set_connected", con });
     if (!con) {
