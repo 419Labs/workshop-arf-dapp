@@ -2,15 +2,31 @@
 
 **StarknetCC** - Full dApp workshop by Alpha Road team
 
+You'll find the PDF presentation [here](./files/presentation.pdf)
+
 ## Introduction
 
 This workshop will show you how to dev a full Starknet dApp with NextJS & [Starknet.js](https://github.com/seanjameshan/starknet.js), including multi-wallets support([Argent-x](https://github.com/argentlabs/argent-x) | [Braavos](https://braavos.app/)) and multi-call transactions.
 
 This repo contains the front-end part, you'll find the contracts part [here (access controller)](https://github.com/419Labs/access-controller-contracts)
 
-You'll also use an ERC20 contract, with a 'freeMint' function added to permit to mint up to 1k tokens per call(see [ABI](src/contracts/abis/ARF_ERC20.json)).
+You'll also use an ERC20 contract, with a 'freeMint' function added allowing you to mint up to 1k tokens per call(see [ABI](src/contracts/abis/ARF_ERC20.json)).
 
 This workshop currently run on the **Starknet Goerli Testnet**
+
+## Use case
+
+Explore the contract interactions in NextJS by using an access controller contract (whitelist) & ERC20 contracts deployed on Starknet.
+
+- Contract interactions
+  - Start with existing contracts
+  - Deploy & connect your own
+- Access controller
+  - freeSlotsCount
+  - isAllowed
+  - register
+- Minting tokens (multicalls)
+
 
 ## The Goal
 
@@ -81,6 +97,7 @@ Here are the interesting files tree you'll have to update/use during this worksh
    2) Contract addresses are located in [contract constants](src/contracts/addresses.ts)
    3) Use of [React Context](https://fr.reactjs.org/docs/hooks-reference.html#usecontext) to isolate code complexity
    4) (use of [ChakraUI](https://chakra-ui.com/getting-started) components library)
+   5) Uncomment part by part the workshop in [index.ts](src/pages/index.tsx)
 2) Fetching block infos
    1) Update the [StarknetProvider](src/context/StarknetProvider/manager.ts) to connect to the default Starknet provider by using [Starknet.js](https://github.com/seanjameshan/starknet.js)
    2) Update the [BlockProvider](src/context/BlockProvider/provider.tsx), use the current provider to fetch current block infos
@@ -149,6 +166,7 @@ There some improvements you can make to improve this workshop, here is a non-exh
 - Save transactions in local storage
 - Display current transaction information on the UI (toast, history panel, ...)
 - Auto reload of: whitelisted after register, balance after mint
+- Implement a button to be able to add a specific token to your wallet
 - ...
 
 ## Docs
@@ -168,7 +186,7 @@ https://github.com/OpenZeppelin/cairo-contracts
 Work with **big numbers** in JavaScript could be a mess.
 As you'll probably use the 18 decimals standard for the token balances, you'll not be able to store it as a Number but as a string representation.
 To abstract the complexity, you can use the well known [Ether.js library](https://docs.ethers.io/v5/getting-started/) (especially the formatUnits & parseUnits)
-in completion of the [Starknet.js](https://github.com/seanjameshan/starknet.js) helpers(toFelt, bnToUint256, ...)
+in completion of the [Starknet.js](https://www.starknetjs.com/docs/API/utils#number) helpers(toFelt, bnToUint256, ...)
 
 
 ## Thanks
