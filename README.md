@@ -97,6 +97,7 @@ Here are the interesting files tree you'll have to update/use during this worksh
    2) Contract addresses are located in [contract constants](src/contracts/addresses.ts)
    3) Use of [React Context](https://fr.reactjs.org/docs/hooks-reference.html#usecontext) to isolate code complexity
    4) (use of [ChakraUI](https://chakra-ui.com/getting-started) components library)
+   5) Uncomment part by part the workshop in [index.ts](src/pages/index.tsx)
 2) Fetching block infos
    1) Update the [StarknetProvider](src/context/StarknetProvider/manager.ts) to connect to the default Starknet provider by using [Starknet.js](https://github.com/seanjameshan/starknet.js)
    2) Update the [BlockProvider](src/context/BlockProvider/provider.tsx), use the current provider to fetch current block infos
