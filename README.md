@@ -2,13 +2,15 @@
 
 **StarknetCC** - Full dApp workshop by Alpha Road team
 
+You'll find the PDF presentation [here](./files/presentation.pdf)
+
 ## Introduction
 
 This workshop will show you how to dev a full Starknet dApp with NextJS & [Starknet.js](https://github.com/seanjameshan/starknet.js), including multi-wallets support([Argent-x](https://github.com/argentlabs/argent-x) | [Braavos](https://braavos.app/)) and multi-call transactions.
 
 This repo contains the front-end part, you'll find the contracts part [here (access controller)](https://github.com/419Labs/access-controller-contracts)
 
-You'll also use an ERC20 contract, with a 'freeMint' function added to permit to mint up to 1k tokens per call(see [ABI](src/contracts/abis/ARF_ERC20.json)).
+You'll also use an ERC20 contract, with a 'freeMint' function added allowing you to mint up to 1k tokens per call(see [ABI](src/contracts/abis/ARF_ERC20.json)).
 
 This workshop currently run on the **Starknet Goerli Testnet**
 
