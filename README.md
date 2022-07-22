@@ -2,15 +2,31 @@
 
 **StarknetCC** - Full dApp workshop by Alpha Road team
 
+You'll find the PDF presentation [here](./files/presentation.pdf)
+
 ## Introduction
 
 This workshop will show you how to dev a full Starknet dApp with NextJS & [Starknet.js](https://github.com/seanjameshan/starknet.js), including multi-wallets support([Argent-x](https://github.com/argentlabs/argent-x) | [Braavos](https://braavos.app/)) and multi-call transactions.
 
 This repo contains the front-end part, you'll find the contracts part [here (access controller)](https://github.com/419Labs/access-controller-contracts)
 
-You'll also use an ERC20 contract, with a 'freeMint' function added to permit to mint up to 1k tokens per call(see [ABI](src/contracts/abis/ARF_ERC20.json)).
+You'll also use an ERC20 contract, with a 'freeMint' function added allowing you to mint up to 1k tokens per call(see [ABI](src/contracts/abis/ARF_ERC20.json)).
 
 This workshop currently run on the **Starknet Goerli Testnet**
+
+## Use case
+
+Explore the contract interactions in NextJS by using an access controller contract (whitelist) & ERC20 contracts deployed on Starknet.
+
+- Contract interactions
+   - Start with existing contracts
+   - Deploy & connect your own
+- Access controller
+   - freeSlotsCount
+   - isAllowed
+   - register
+- Minting tokens (multicalls)
+
 
 ## The Goal
 
@@ -21,7 +37,7 @@ This workshop currently run on the **Starknet Goerli Testnet**
 To follow this workshop you should at least:
 - Have a Starknet compatible wallet installed (with some Starknet Goerli ETH in wallet to do TX's)
 - Have basic knowledge in ReactJS / NextJS framework
-- Have basic knowledge in Cairo smart contracts development 
+- Have basic knowledge in Cairo smart contracts development
 - Have basic knowledge on how Starknet works(BC in general, Account abstraction, ...)
 
 About the tooling:
@@ -42,7 +58,7 @@ Install Dependencies
 yarn | npm install 
 ```
 
-Run in dev 
+Run in dev
 
 ```bash
 yarn dev | npm run dev
@@ -61,8 +77,8 @@ Here are the interesting files tree you'll have to update/use during this worksh
          - Transactions.tsx
          - WalletConnect.tsx
    - __pages__
-     - _app.tsx
-     - index.tsx
+      - _app.tsx
+      - index.tsx
    - __context__
       - __BlockProvider__
       - __ContractProvider__
@@ -92,13 +108,13 @@ Here are the interesting files tree you'll have to update/use during this worksh
    3) You should be able to connect with Braavos or ArgentX, and see your current address on the UI
 4) Your first transaction
    1) Start by taking a look at the [Contract Provider model](src/context/ContractProvider/model.ts)
-   2) You can now update the [RegisterWhitelist component](src/components/wallet/RegisterWhitelist.tsx) to 
+   2) You can now update the [RegisterWhitelist component](src/components/wallet/RegisterWhitelist.tsx) to
       1) Fetch the total free slots currently available
       2) Fetch the current whitelisted status of the connected account
       3) Register to the whitelist if there is free slots & the connected account is not currently whitelisted
 5) Multi-call
    1) Look at the [MultiMint component](src/components/wallet/MultiMint.tsx)
-   2) Here you'll have to 
+   2) Here you'll have to
       1) Fetch balances of arfBTC & arfETH when needed
       2) Mint both arfBTC & arfETH in 1 TX using the multicall
    3) (You can also make a 'register to whitelist + mint token' in 1 TX as well)
@@ -149,6 +165,7 @@ There some improvements you can make to improve this workshop, here is a non-exh
 - Save transactions in local storage
 - Display current transaction information on the UI (toast, history panel, ...)
 - Auto reload of: whitelisted after register, balance after mint
+- Implement a button to be able to add a specific token to your wallet
 - ...
 
 ## Docs
@@ -168,7 +185,7 @@ https://github.com/OpenZeppelin/cairo-contracts
 Work with **big numbers** in JavaScript could be a mess.
 As you'll probably use the 18 decimals standard for the token balances, you'll not be able to store it as a Number but as a string representation.
 To abstract the complexity, you can use the well known [Ether.js library](https://docs.ethers.io/v5/getting-started/) (especially the formatUnits & parseUnits)
-in completion of the [Starknet.js](https://github.com/seanjameshan/starknet.js) helpers(toFelt, bnToUint256, ...)
+in completion of the [Starknet.js](https://www.starknetjs.com/docs/API/utils#number) helpers(toFelt, bnToUint256, ...)
 
 
 ## Thanks
