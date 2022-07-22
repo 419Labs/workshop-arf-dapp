@@ -11,10 +11,10 @@ const Home = () => {
     <Flex mb={8} w="full" h="full" flexDirection="column">
       <HelloText />
       <Box flex="1 1 auto">
-        <Block />
+        {/*<Block />
         <Transactions />
         <RegisterWhitelist />
-        <MultiMint />
+        <MultiMint />*/}
       </Box>
       <CTASection />
     </Flex>
